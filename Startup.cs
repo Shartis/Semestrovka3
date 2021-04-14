@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Semestrovka4.Data;
+using Semestrovka4.Models;
 
 namespace Semestrovka4
 {
@@ -23,6 +26,10 @@ namespace Semestrovka4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DataBase")));
+            services.AddIdentityCore<User>()            
+                .AddEntityFrameworkStores<ApplicationContext>();
             services.AddControllersWithViews();
         }
 
