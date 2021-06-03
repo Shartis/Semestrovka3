@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace Semestrovka4.Models
 {
-    public class ArticleViewModel
+    public class SignUpAndInModel
     {
+        public LoginModel LoginModel { get; set; }
+        public RegisterModel RegisterModel { get; set; }
     }
 }
