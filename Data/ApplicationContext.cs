@@ -16,6 +16,8 @@ namespace Semestrovka4.Data
         public DbSet<Tag> Tag { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public object Expired { get; internal set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Expired> Expireds { get; set; }
 
         public ApplicationContext() { }
 

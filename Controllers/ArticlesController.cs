@@ -15,19 +15,19 @@ namespace Semestrovka4.Controllers
         private readonly ApplicationContext _dbContext;
         private readonly GetArticleImage _getArticleImage;
 
-        public SArticleController(ApplicationContext dbContext, GetArticleImage getArticleImage)
+        public ArticlesController(ApplicationContext dbContext, GetArticleImage getArticleImage)
         {
             _dbContext = dbContext;
             _getArticleImage = getArticleImage;
         }
 
         [Route("~/Article")]
-        public IActionResult Article()
+        public IActionResult Articles()
         {
-            var article = _dbContext.Article.Where(p => p.Category == "Article").ToList();
-            var model = new Article()
+            var articles = _dbContext.Articles.Where(p => p.Category == "Article").ToList();
+            var model = new ArticleViewModel()
             {
-                Article = article
+                Articles = articles
             };
 
             return View("Article", model);

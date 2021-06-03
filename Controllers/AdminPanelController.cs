@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Semestrovka4.Data;
 using Semestrovka4.Infrostructure;
 using Semestrovka4.Models;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Semestrovka4.Controllers
 {
@@ -30,9 +32,9 @@ namespace Semestrovka4.Controllers
 
         public IActionResult Index()
         {
-            Article model = new Article()
+            ArticleViewModel model = new ArticleViewModel()
             {
-                Article = _dbContext.Article.ToList()
+               Articles = _dbContext.Articles.ToList()
             };
             return View("AdminPage", model);
         }

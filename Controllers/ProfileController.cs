@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Semestrovka4.Infrostructure;
 
 namespace Semestrovka4.Controllers
 {
@@ -19,10 +20,10 @@ namespace Semestrovka4.Controllers
     {
         private readonly ApplicationContext _dbContext;
         private readonly IWebHostEnvironment _appEnvironment;
-        private readonly AuthenticationService _authenticationService;
+        private readonly Infrostructure.AuthenticationService _authenticationService;
 
         public ProfileController(ILogger<ProfileController> logger, ApplicationContext dbContext,
-            IWebHostEnvironment appEnvironment, AuthenticationService authenticationService)
+            IWebHostEnvironment appEnvironment, Infrostructure.AuthenticationService authenticationService)
         {
             _dbContext = dbContext;
             _appEnvironment = appEnvironment;
