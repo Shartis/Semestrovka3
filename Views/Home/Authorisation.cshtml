@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Authorisation";
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -94,7 +96,7 @@
                 </span>
             </div>
             <div class="form-group input-group">
-                <span class="input-group-addon">@</span>
+                <span class="input-group-addon"></span>
                 <span class="has-float-label">
                     <input class="form-control" id="email" type="email" placeholder="name@example.com" />
                     <label for="email">E-mail</label>
@@ -104,27 +106,9 @@
                 <input class="form-control" id="password" type="password" placeholder="••••••••" />
                 <label for="password">Пароль</label>
             </div>
-            <div class="form-group has-float-label">
-                <input class="form-control" id="password" type="password" placeholder="••••••••" />
-                <label for="password">Пароль повторно</label>
-            </div>
-            <div class="form-group has-float-label">
-                <select class="form-control custom-select" id="country">
-                    <option selected>Россия</option>
-                    <option>Казахстан</option>
-                    <option>Белоруссия</option>
-                </select>
-                <label for="country">Страна</label>
-            </div>
-            <div class="form-group">
-                <label class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" />
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Получать новости</span>
-                </label>
-            </div>
+
             <div class="text-xs-center">
-                <button class="btn btn-block btn-primary" type="submit">Регистрация</button>
+                <button class="btn btn-block btn-primary" type="submit">Авторизация</button>
             </div>
         </form>
     </div>
@@ -133,12 +117,12 @@
         <script type="text/javascript">
             VK.init({ apiId: 7871308 });
         </script>
-   
-            <!-- VK Widget -->
-            <div id="vk_auth"></div>
-            <script type="text/javascript">
-                VK.Widgets.Auth("vk_auth", { "width": 450, "heigh": 300, "authUrl": "/dev/Login" });
-            </script>
-        </div>
+
+        <!-- VK Widget -->
+        <div id="vk_auth"></div>
+        <script type="text/javascript">
+            VK.Widgets.Auth("vk_auth", { "width": 450, "heigh": 300, "authUrl": "/dev/Login" });
+        </script>
+    </div>
 </body>
 </html>
