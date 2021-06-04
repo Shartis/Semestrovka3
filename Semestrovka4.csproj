@@ -14,14 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Home\Index.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Views\Home\Index.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\images\10-1-1-875x500.jpg" />
     <None Include="wwwroot\images\32-450x260.jpg" />
     <None Include="wwwroot\images\39-324x235.jpg" />
