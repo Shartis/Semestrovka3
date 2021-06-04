@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Semestrovka4.Data;
 using Semestrovka4.Models;
+using WebMarkupMin.AspNetCore3;
 
 namespace Semestrovka4
 {
@@ -31,6 +32,20 @@ namespace Semestrovka4
             services.AddIdentityCore<User>()            
                 .AddEntityFrameworkStores<ApplicationContext>();
             services.AddControllersWithViews();
+            services.AddWebMarkupMin(
+            options =>
+            {
+                options.AllowMinificationInDevelopmentEnvironment = true;
+                options.AllowCompressionInDevelopmentEnvironment = true;
+            })
+            .AddHtmlMinification(
+                options =>
+                {
+                    options.MinificationSettings.RemoveRedundantAttributes = true;
+                    options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
+                    options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
+                })
+            .AddHttpCompression();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +63,7 @@ namespace Semestrovka4
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseWebMarkupMin();
             app.UseRouting();
 
             app.UseAuthorization();
