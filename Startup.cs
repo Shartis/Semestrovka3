@@ -12,6 +12,8 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using DAL;
 using DAL.Models;
+using BLL.Services.Implementations;
+using BLL.Services.Interfaces;
 
 namespace Semestrovka4
 {
@@ -30,6 +32,9 @@ namespace Semestrovka4
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DataBase")));
             services.AddSignalR();
+            services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IAccountService, AccountService>();
+
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<ApplicationContext>();
             services.AddControllersWithViews();

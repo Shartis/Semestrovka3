@@ -79,7 +79,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Articles\" />
-    <Folder Include="Views\Новая папка\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
 
   <ItemGroup>
