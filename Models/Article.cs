@@ -8,7 +8,6 @@ namespace Semestrovka4.Models
 {
     public class Article
     {              
-        [Key]
         public int Id { get; set; }
         public string AuthorName { get; set; }
         public string Content { get; set; }

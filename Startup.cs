@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Semestrovka4.Data;
 using Semestrovka4.Models;
 using WebMarkupMin.AspNetCore3;
+using SignalRChat.Hubs;
+using Semestrovka4.Hub;
 
 namespace Semestrovka4
 {
@@ -29,6 +26,7 @@ namespace Semestrovka4
         {
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DataBase")));
+            services.AddSignalR();
             services.AddIdentityCore<User>()            
                 .AddEntityFrameworkStores<ApplicationContext>();
             services.AddControllersWithViews();
@@ -70,6 +68,7 @@ namespace Semestrovka4
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
