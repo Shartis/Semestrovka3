@@ -19,6 +19,13 @@ namespace BLL.Services.Implementations
             _Context = context;
             _passwordHasher = passwordHasher;
         }
+
+        public async Task<User> FindByEmail(string email)
+        {
+            var user = await _Context.Users.FirstOrDefaultAsync(X => X.Email == email);
+            return user;
+        }
+
         public Task LogIn(RegisterModel model)
         {
             throw new NotImplementedException();

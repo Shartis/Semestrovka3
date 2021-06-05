@@ -31,8 +31,14 @@ namespace Semestrovka4.Controllers
         {
             if (ModelState.IsValid)
             {
-                 await _accountService.Register(model);
-                return RedirectToAction("Index", "Profile");
+                var user = _accountService.FindByEmail(model.Email);
+                if (user == null)
+                {
+                    await _accountService.Register(model);
+                    return RedirectToAction("Index", "Profile");
+                }
+                ModelState.AddModelError("user", "Пользователь существует");
+    
             }
             return View(model);
 
