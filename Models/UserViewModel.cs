@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Semestrovka4.Models
+namespace DAL.Models
 {
     public class UserViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace Semestrovka4.Hub
+namespace DAL.Hubs
 {
     public class ChatHub : Hub
     {

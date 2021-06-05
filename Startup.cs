@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Semestrovka4.Data;
-using Semestrovka4.Models;
+using DAL.Models;
 using WebMarkupMin.AspNetCore3;
-using SignalRChat.Hubs;
-using Semestrovka4.Hub;
+using DAL.Hubs;
+using DAL;
+using System;
+using Microsoft.AspNetCore.Identity;
 
-namespace Semestrovka4
+namespace DAL
 {
     public class Startup
     {
@@ -27,7 +28,7 @@ namespace Semestrovka4
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DataBase")));
             services.AddSignalR();
-            services.AddIdentityCore<User>()            
+            services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<ApplicationContext>();
             services.AddControllersWithViews();
             services.AddWebMarkupMin(

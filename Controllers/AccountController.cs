@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Semestrovka4.Controllers
+namespace DAL.Controllers
 {
     public class AccountController : Controller
     {

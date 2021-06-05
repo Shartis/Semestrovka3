@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Semestrovka4.Models;
+using DAL.Models;
 
-namespace Semestrovka4.Controllers
+namespace DAL.Controllers
 {
     public class HomeController : Controller
     {
