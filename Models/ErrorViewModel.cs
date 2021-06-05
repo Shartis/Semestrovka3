@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace DAL.Models
+namespace Semestrovka4.Models
 {
     public class ErrorViewModel
     {

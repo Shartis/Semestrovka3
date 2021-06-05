@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DAL.Controllers
+namespace Semestrovka4.Controllers
 {
     public class ProfileController : Controller
     {

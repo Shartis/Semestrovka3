@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
     <Compile Remove="Views\Authorization\**" />
+    <Content Remove="Services\**" />
     <Content Remove="Views\Authorization\**" />
+    <EmbeddedResource Remove="Services\**" />
     <EmbeddedResource Remove="Views\Authorization\**" />
+    <None Remove="Services\**" />
     <None Remove="Views\Authorization\**" />
   </ItemGroup>
 
@@ -74,8 +78,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="Views\Articles\" />
+    <Folder Include="Views\Новая папка\" />
   </ItemGroup>
 
   <ItemGroup>

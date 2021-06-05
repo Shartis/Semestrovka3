@@ -4,14 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using DAL.Models;
+using Semestrovka4.Models;
 using WebMarkupMin.AspNetCore3;
-using DAL.Hubs;
-using DAL;
+using Semestrovka4.Hubs;
+using Semestrovka4;
 using System;
 using Microsoft.AspNetCore.Identity;
+using DAL;
+using DAL.Models;
 
-namespace DAL
+namespace Semestrovka4
 {
     public class Startup
     {
