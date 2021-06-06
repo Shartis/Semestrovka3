@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.Models;
 using DAL;
 using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Semestrovka4.Controllers
 {
@@ -16,10 +18,11 @@ namespace Semestrovka4.Controllers
     public class AdminController : Controller
     {
         public readonly ApplicationContext _context;
-
-        public AdminController(ApplicationContext appContext)
+        private IWebHostEnvironment _appEnvironment;
+        public AdminController(ApplicationContext appContext, IWebHostEnvironment appEnvironment)
         {
             _context = appContext;
+            _appEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
@@ -52,16 +55,44 @@ namespace Semestrovka4.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddArticle(DAL.Models.Article article)
+        public async Task<IActionResult> AddArticle(ArticleModel model)
         {
-            return View();
+
+            if (model.Image != null)
+            {
+                // путь к папке Files
+                string path = "/images/" + model.Image.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await model.Image.CopyToAsync(fileStream);
+                }
+
+                var article = new Article()
+                {
+                    AuthorName = User.Identity.Name,
+                    Content = model.Content,
+                    DatePublic = DateTime.Now,
+                    TagID = Convert.ToInt32(model.Tag),
+                    Image = path,
+                };
+                _context.Articles.Add(article);
+                await _context.SaveChangesAsync();
+
+            }
+            return RedirectToAction("Articles", "Article");
         }
 
         public IActionResult AddArticle()
         {
-            return View();
+            var tags = _context.Tags.Select(t => new SelectListItem(t.Name, t.Id.ToString())).AsEnumerable();
+            return View(new ArticleModel()
+            {
+                Tags = tags,
+            });
         }
 
-        
+
     }
+
 }

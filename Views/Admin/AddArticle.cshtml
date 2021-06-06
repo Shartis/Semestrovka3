@@ -3,13 +3,14 @@
     Layout = "_AdminLayout";
 }
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
 <div>
     <div class="p-x-1 p-y-3">
-        <form class="card card-block m-x-auto bg-faded form-width" asp-controller="Admin" asp-action="AddArticle" method="post" style="
+        <form class="card card-block m-x-auto bg-faded form-width" enctype="multipart/form-data" asp-controller="Admin" asp-action="AddArticle" method="post" style="
     padding-left: 20px;
     width: 642px;
 ">
-            <legend class="m-b-1 text-xs-center">Add aeticle</legend>
+            <legend class="m-b-1 text-xs-center">Add article</legend>
 
             <div class="form-group input-group">
                 <span class="has-float-label">
@@ -21,7 +22,7 @@
 
             <div class="form-group input-group">
                 <span class="has-float-label">
-                    <input class="form-control" asp-for="Image" placeholder="Image">
+                    <input type="file" class="form-control" asp-for="Image" placeholder="Image">
                     <label asp-for="Image"></label>
                     <span asp-validation-for="Image"></span>
                 </span>
