@@ -11,9 +11,11 @@ namespace DAL
 {
     public partial class ApplicationContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
-        public DbSet<User> User { get; set; }
-        public DbSet<Article> Article { get; set; }
-        public DbSet<Tag> Tag { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
 
         public ApplicationContext() { }
 

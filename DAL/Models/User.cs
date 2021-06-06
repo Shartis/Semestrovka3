@@ -13,6 +13,7 @@ namespace DAL.Models
         public string Email { get; set; }
         public string Name { get; set; }
         public string HashedPassword { get; set; } 
-        public string Image;
+        public string Image { get; set; }
+        public string Role { get; set; }
     }
 }

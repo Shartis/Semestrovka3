@@ -16,12 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\bootstrap.js" />
-    <Content Remove="wwwroot\js\jquery.stellar.min.js" />
-    <Content Remove="wwwroot\js\jquery.waypoints.min.js" />
-    <Content Remove="wwwroot\js\main.js" />
-    <Content Remove="wwwroot\js\modernizr-3.5.0.min.js" />
-    <Content Remove="wwwroot\js\owl.carousel.min.js" />
+    <Content Remove="wwwroot\customjs\bootstrap.js" />
+    <Content Remove="wwwroot\customjs\jquery.stellar.min.js" />
+    <Content Remove="wwwroot\customjs\jquery.waypoints.min.js" />
+    <Content Remove="wwwroot\customjs\main.js" />
+    <Content Remove="wwwroot\customjs\modernizr-3.5.0.min.js" />
+    <Content Remove="wwwroot\customjs\owl.carousel.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\customjs\bootstrap.js" />
+    <None Include="wwwroot\customjs\jquery.stellar.min.js" />
+    <None Include="wwwroot\customjs\jquery.waypoints.min.js" />
+    <None Include="wwwroot\customjs\main.js" />
+    <None Include="wwwroot\customjs\modernizr-3.5.0.min.js" />
+    <None Include="wwwroot\customjs\owl.carousel.min.js" />
     <None Include="wwwroot\images\10-1-1-875x500.jpg" />
     <None Include="wwwroot\images\32-450x260.jpg" />
     <None Include="wwwroot\images\39-324x235.jpg" />
@@ -54,12 +60,6 @@
     <None Include="wwwroot\images\vil-son-35490.jpg" />
     <None Include="wwwroot\images\white_logo.png" />
     <None Include="wwwroot\images\zack-minor-15104.jpg" />
-    <None Include="wwwroot\js\bootstrap.js" />
-    <None Include="wwwroot\js\jquery.stellar.min.js" />
-    <None Include="wwwroot\js\jquery.waypoints.min.js" />
-    <None Include="wwwroot\js\main.js" />
-    <None Include="wwwroot\js\modernizr-3.5.0.min.js" />
-    <None Include="wwwroot\js\owl.carousel.min.js" />
     <None Include="wwwroot\sass\style_1.scss" />
   </ItemGroup>
 
@@ -75,9 +75,5 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.10.0" />
     <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
 </Project>

@@ -11,9 +11,10 @@ namespace BLL.Models
         [Required(ErrorMessage = "Не указан Email")]
         public string Email { get; set; }
 
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
-        public string RememberMe { get; set; }
+        public bool RememberMe { get; set; }
     }
 }

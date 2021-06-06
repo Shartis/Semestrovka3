@@ -14,6 +14,7 @@ using DAL;
 using DAL.Models;
 using BLL.Services.Implementations;
 using BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Semestrovka4
 {
@@ -31,9 +32,20 @@ namespace Semestrovka4
         {
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DataBase")));
+
             services.AddSignalR();
+
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
             services.AddScoped<IAccountService, AccountService>();
+
+            services.AddScoped<AuthenticationService>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Register");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/LogIn");
+                });
 
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<ApplicationContext>();
@@ -72,6 +84,7 @@ namespace Semestrovka4
             app.UseWebMarkupMin();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

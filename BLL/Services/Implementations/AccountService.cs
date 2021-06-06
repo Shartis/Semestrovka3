@@ -14,24 +14,34 @@ namespace BLL.Services.Implementations
     {
         private readonly ApplicationContext _Context;
         private readonly IPasswordHasher _passwordHasher;
-        public AccountService(ApplicationContext context, IPasswordHasher passwordHasher)
+        private readonly AuthenticationService _authenticationService;
+        public AccountService(ApplicationContext context, IPasswordHasher passwordHasher, AuthenticationService authenticationService)
         {
             _Context = context;
             _passwordHasher = passwordHasher;
+            _authenticationService = authenticationService;
         }
 
-        public async Task<User> FindByEmail(string email)
+        public async Task<User> FindByEmailAsync(string email)
         {
             var user = await _Context.Users.FirstOrDefaultAsync(X => X.Email == email);
             return user;
         }
-
-        public Task LogIn(RegisterModel model)
+        public async Task<User> FindByEmailAndPasswordAsync(string email, string password)
         {
-            throw new NotImplementedException();
+            var user = await _Context.Users.FirstOrDefaultAsync(X => X.Email == email && X.HashedPassword == _passwordHasher.Hash(password));
+            return user;
+        }
+        public async Task LogInAsync(User user, bool rememberMe)
+        {
+            await _authenticationService.Authenticate(user, rememberMe);
+        }
+        public async Task LogOutAsync()
+        {
+            await _authenticationService.Logout();
         }
 
-        public async Task Register(RegisterModel model)
+        public async Task RegisterAsync(RegisterModel model)
         {
             User user = await _Context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
             if (user == null)
@@ -41,8 +51,15 @@ namespace BLL.Services.Implementations
                     Email = model.Email,
                     Name = model.Name,
                     HashedPassword = _passwordHasher.Hash(model.Password),
+                    Role = "user",
                 };
+                await _Context.AddAsync(user);
+                await _Context.SaveChangesAsync();
+
             }
+
         }
+
+
     }
 }
