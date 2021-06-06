@@ -77,7 +77,7 @@
 <div class="p-x-1 p-y-3">
     <form class="card card-block m-x-auto bg-faded form-width" asp-controller="Account" asp-action="Registration" method="post">
         <legend class="m-b-1 text-xs-center">Регистрация</legend>
-        <p>@ValidationSummary</p>
+        <p>@Html.ValidationSummary(true)</p>
         <div class="form-group input-group">
             <span class="has-float-label">
                 <input class="form-control"asp-for="Name" placeholder="Имя" />

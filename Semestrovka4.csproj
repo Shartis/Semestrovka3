@@ -78,13 +78,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Articles\" />
-    <Folder Include="Views\Profile\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj" />
-    <ProjectReference Include="..\DAL\DAL.csproj" />
-  </ItemGroup>
-
 </Project>

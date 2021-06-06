@@ -31,7 +31,7 @@ namespace Semestrovka4.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _accountService.FindByEmail(model.Email);
+                var user = await _accountService.FindByEmail(model.Email);
                 if (user == null)
                 {
                     await _accountService.Register(model);
