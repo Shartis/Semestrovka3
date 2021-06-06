@@ -2,6 +2,7 @@
 using BLL.Services.Interfaces;
 using DAL;
 using DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,36 +14,44 @@ namespace BLL.Services.Implementations
     public class AccountService : IAccountService
     {
         private readonly ApplicationContext _Context;
-        private readonly IPasswordHasher _passwordHasher;
-        public AccountService(ApplicationContext context, IPasswordHasher passwordHasher)
+
+        public readonly UserManager<User> _userManager;
+        public readonly SignInManager<User> _signInManager;
+
+        public AccountService(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _Context = context;
-            _passwordHasher = passwordHasher;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
-        public async Task<User> FindByEmail(string email)
+        public async Task<User> FindByNameAsync(string name)
         {
-            var user = await _Context.Users.FirstOrDefaultAsync(X => X.Email == email);
+            var user = await _userManager.FindByNameAsync(name);
             return user;
         }
-
-        public Task LogIn(RegisterModel model)
+        public async Task LogInAsync(string name, string password, bool rememberMe)
         {
-            throw new NotImplementedException();
+            var res = await _signInManager.PasswordSignInAsync(name, password, rememberMe, false);
+        }
+        public async Task LogOutAsync()
+        {
+            await _signInManager.SignOutAsync();
         }
 
-        public async Task Register(RegisterModel model)
+        public async Task RegisterAsync(RegisterModel model)
         {
-            User user = await _Context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+            User user = await FindByNameAsync(model.Name);
             if (user == null)
             {
-                user = new User
+                var res = await _userManager.CreateAsync(new User()
                 {
+                    UserName = model.Name,
                     Email = model.Email,
-                    Name = model.Name,
-                    HashedPassword = _passwordHasher.Hash(model.Password),
-                };
+                }, model.Password);
             }
+
         }
+
     }
 }

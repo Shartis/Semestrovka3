@@ -1,0 +1,44 @@
+﻿@model BLL.Models.ArticleModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+<div>
+    <div class="p-x-1 p-y-3">
+        <form class="card card-block m-x-auto bg-faded form-width" enctype="multipart/form-data" asp-controller="Admin" asp-action="AddArticle" method="post" style="
+    padding-left: 20px;
+    width: 642px;
+">
+            <legend class="m-b-1 text-xs-center">Add article</legend>
+
+            <div class="form-group input-group">
+                <span class="has-float-label">
+                    <textarea class="form-control" asp-for="Content" placeholder="Content"></textarea>
+                    <label asp-for="Content"></label>
+                    <span asp-validation-for="Content"></span>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <span class="has-float-label">
+                    <input type="file" class="form-control" asp-for="Image" placeholder="Image">
+                    <label asp-for="Image"></label>
+                    <span asp-validation-for="Image"></span>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <span class="has-float-label">
+                    <select class="form-control" asp-for="Tag" asp-items="@Model.Tags" placeholder="Tag"></select>
+                    <label asp-for="Tag"></label>
+                    <span asp-validation-for="Tag"></span>
+                </span>
+            </div>
+
+            <div class="text-xs-center">
+                <button class="btn btn-block btn-primary" type="submit">Add </button>
+            </div>
+        </form>
+    </div>
+</div>

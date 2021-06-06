@@ -1,0 +1,27 @@
+﻿@model BLL.Models.TagModel;
+@{
+    Layout = "_AdminLayout";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+
+<div>
+    <div class="p-x-1 p-y-3">
+        <form class="card card-block m-x-auto bg-faded form-width" asp-controller="Admin" asp-action="AddTag" method="post" style="
+    padding-left: 20px;
+    width: 642px;
+">
+            <legend class="m-b-1 text-xs-center">Add tag</legend>
+            <div class="form-group input-group">
+                <span class="has-float-label">
+                    <input asp-for="Name" class="form-control" placeholder="Tag">
+                    <label asp-for="Name"></label>
+                    <span asp-validation-for="Name"></span>
+                </span>
+            </div>
+
+            <div class="text-xs-center">
+                <button class="btn btn-block btn-primary" type="submit">Add </button>
+            </div>
+        </form>
+    </div>
+</div>

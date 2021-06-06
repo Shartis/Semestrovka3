@@ -15,5 +15,15 @@ namespace Semestrovka4.Controllers
         {
             return View();
         }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }        
+
+        public IActionResult Community()
+        {
+            return View();
+        }
     }
 }

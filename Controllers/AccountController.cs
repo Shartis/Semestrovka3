@@ -12,13 +12,11 @@ namespace Semestrovka4.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService)
+        private readonly AuthenticationService _authenticationService;
+        public AccountController(IAccountService accountService, AuthenticationService authenticationService)
         {
             _accountService = accountService;
-        }
-        public IActionResult Index()
-        {
-            return View();
+            _authenticationService = authenticationService;
         }
 
         public IActionResult Registration()
@@ -27,21 +25,50 @@ namespace Semestrovka4.Controllers
         }
 
         [HttpPost]
-        public async Task <IActionResult> Registration(RegisterModel model)
+        public async Task<IActionResult> Registration(RegisterModel model)
         {
+            var user1 = User;
             if (ModelState.IsValid)
             {
-                var user = _accountService.FindByEmail(model.Email);
+                var user = await _accountService.FindByNameAsync(model.Name);
                 if (user == null)
                 {
-                    await _accountService.Register(model);
-                    return RedirectToAction("Index", "Profile");
+                    await _accountService.RegisterAsync(model);
+                    return RedirectToAction("LogIn", "Account");
                 }
-                ModelState.AddModelError("user", "Пользователь существует");
-    
+                ModelState.AddModelError("", "Пользователь существует");
+
             }
             return View(model);
 
+        }
+
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LoginModel model)
+        {
+            var user1 = User;
+
+            if (ModelState.IsValid)
+            {
+                var user = await _accountService.FindByNameAsync(model.Name);
+                if (user != null)
+                {
+                    await _accountService.LogInAsync(model.Name, model.Password, model.RememberMe);
+                    return RedirectToAction("Index", "Profile");
+                }
+                return RedirectToAction("Registration", "Account");
+            }
+            return View(model);
+
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await _accountService.LogOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
