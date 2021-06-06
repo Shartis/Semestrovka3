@@ -10,10 +10,8 @@ namespace BLL.Services.Interfaces
     public interface IAccountService
     {
         public Task RegisterAsync(RegisterModel model);
-        public Task LogInAsync(User user, bool rememberMe);
+        public Task LogInAsync(string email, string password, bool rememberMe);
         public Task LogOutAsync();
-        public Task<User> FindByEmailAsync(string email);
-
-        public Task<User> FindByEmailAndPasswordAsync(string email, string password);
+        public Task<User> FindByNameAsync(string name);
     }
 }

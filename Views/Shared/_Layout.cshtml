@@ -97,17 +97,18 @@
                             <a class="nav-link" href="single.html">Single <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="blog.html">News <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Community">Community <span class="sr-only">(current)</span></a>
                         </li>
+
                         <li class="nav-item ">
-                            <a class="nav-link" href="blog.html">News <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" asp-controller="Home" asp-action="ContactUs"> Contact <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="Contact_us.html">Contact <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" asp-controller="Admin" asp-action="Index"> Admin <span class="sr-only">(current)</span></a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="Admin" asp-action="Index"> Admin <span class="sr-only">(current)</span></a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>
@@ -220,10 +221,8 @@
                     <div class="row  ">
                         <div class="col-12 col-md-6 py-4 Reserved"> © Copyright 2018, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
                         <div class="col-12 col-md-6 spdp_right py-4">
-                            <a href="#" class="footer_last_part_menu">Home</a>
-                            <a asp-controller="Account" asp-action="Registration" class="footer_last_part_menu">Registration</a>
-                            <a href="Contact_us.html" class="footer_last_part_menu">About</a>
-                            <a href="Contact_us.html" class="footer_last_part_menu">Contact</a>
+                            <a asp-controller="Home" asp-action="Index" class="footer_last_part_menu">Home</a>
+                            <a asp-controller="Home" asp-action="Community" class="footer_last_part_menu">Contact</a>
                             <a href="blog.html" class="footer_last_part_menu">Latest News</a>
                         </div>
                     </div>

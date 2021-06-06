@@ -110,9 +110,6 @@ namespace Semestrovka4.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("HashedPassword")
-                        .HasColumnType("text");
-
                     b.Property<string>("Image")
                         .HasColumnType("text");
 
@@ -121,9 +118,6 @@ namespace Semestrovka4.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -141,9 +135,6 @@ namespace Semestrovka4.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");

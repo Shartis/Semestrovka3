@@ -8,8 +8,8 @@ namespace BLL.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Не указан Email")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Не указано имя")]
+        public string Name { get; set; }
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Не указан пароль")]

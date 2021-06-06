@@ -18,7 +18,7 @@ namespace Semestrovka4.Controllers
             _accountService = accountService;
             _authenticationService = authenticationService;
         }
-        
+
         public IActionResult Registration()
         {
             return View();
@@ -30,7 +30,7 @@ namespace Semestrovka4.Controllers
             var user1 = User;
             if (ModelState.IsValid)
             {
-                var user = await _accountService.FindByEmailAsync(model.Email);
+                var user = await _accountService.FindByNameAsync(model.Name);
                 if (user == null)
                 {
                     await _accountService.RegisterAsync(model);
@@ -54,10 +54,10 @@ namespace Semestrovka4.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await _accountService.FindByEmailAndPasswordAsync(model.Email, model.Password);
+                var user = await _accountService.FindByNameAsync(model.Name);
                 if (user != null)
                 {
-                    await _authenticationService.Authenticate(user, model.RememberMe);
+                    await _accountService.LogInAsync(model.Name, model.Password, model.RememberMe);
                     return RedirectToAction("Index", "Profile");
                 }
                 return RedirectToAction("Registration", "Account");

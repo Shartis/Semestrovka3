@@ -2,6 +2,7 @@
 using BLL.Services.Interfaces;
 using DAL;
 using DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,53 +14,44 @@ namespace BLL.Services.Implementations
     public class AccountService : IAccountService
     {
         private readonly ApplicationContext _Context;
-        private readonly IPasswordHasher _passwordHasher;
-        private readonly AuthenticationService _authenticationService;
-        public AccountService(ApplicationContext context, IPasswordHasher passwordHasher, AuthenticationService authenticationService)
+
+        public readonly UserManager<User> _userManager;
+        public readonly SignInManager<User> _signInManager;
+
+        public AccountService(ApplicationContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _Context = context;
-            _passwordHasher = passwordHasher;
-            _authenticationService = authenticationService;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
-        public async Task<User> FindByEmailAsync(string email)
+        public async Task<User> FindByNameAsync(string name)
         {
-            var user = await _Context.Users.FirstOrDefaultAsync(X => X.Email == email);
+            var user = await _userManager.FindByNameAsync(name);
             return user;
         }
-        public async Task<User> FindByEmailAndPasswordAsync(string email, string password)
+        public async Task LogInAsync(string name, string password, bool rememberMe)
         {
-            var user = await _Context.Users.FirstOrDefaultAsync(X => X.Email == email && X.HashedPassword == _passwordHasher.Hash(password));
-            return user;
-        }
-        public async Task LogInAsync(User user, bool rememberMe)
-        {
-            await _authenticationService.Authenticate(user, rememberMe);
+            var res = await _signInManager.PasswordSignInAsync(name, password, rememberMe, false);
         }
         public async Task LogOutAsync()
         {
-            await _authenticationService.Logout();
+            await _signInManager.SignOutAsync();
         }
 
         public async Task RegisterAsync(RegisterModel model)
         {
-            User user = await _Context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+            User user = await FindByNameAsync(model.Name);
             if (user == null)
             {
-                user = new User
+                var res = await _userManager.CreateAsync(new User()
                 {
+                    UserName = model.Name,
                     Email = model.Email,
-                    Name = model.Name,
-                    HashedPassword = _passwordHasher.Hash(model.Password),
-                    Role = "user",
-                };
-                await _Context.AddAsync(user);
-                await _Context.SaveChangesAsync();
-
+                }, model.Password);
             }
 
         }
-
 
     }
 }

@@ -54,8 +54,6 @@ namespace BLL.Services.Implementations
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role),
-                new Claim("username", user.Name),
                 new Claim("id",user.Id.ToString())
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie",

@@ -76,4 +76,8 @@
     <PackageReference Include="WebMarkupMin.AspNetCore3" Version="2.10.0" />
     <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\customlib\assets\js\" />
+  </ItemGroup>
 </Project>
